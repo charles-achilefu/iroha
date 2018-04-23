@@ -105,12 +105,10 @@ TEST(PipelineIntegrationTest, SendTx) {
 TEST(PipelineIntegrationTest, SendMultipleTx) {
   auto keypair =
       shared_model::crypto::DefaultCryptoAlgorithmType::generateKeypair();
-  shared_model::interface::types::CounterType counter = 1;
   auto getTx = [&] {
     return shared_model::proto::TransactionBuilder()
         .createdTime(iroha::time::now())
         .creatorAccountId(kUser)
-        .txCounter(counter++)
         .addAssetQuantity(kUser, kAsset, "1.0")
         .build()
         .signAndAddSignature(keypair);
